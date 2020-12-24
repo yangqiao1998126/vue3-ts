@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1. 自定义函数实现call方法
+    function call(fn,obj,...arg) {
+        if(obj == undefined || obj == null){
+            obj = window
+        }
+
+        //在obj添加一个属性 值为要调用的函数
+            obj.call = fn
+           var result = obj.call(...arg)
+            delete obj.call
+         return result
+    }
+
+    //2. 自定义函数实现apply方法
+    function apply(fn,obj,...arg) {
+        if(obj == undefined || obj == null){
+            obj = window
+        }
+
+        //在obj添加一个属性 值为要调用的函数
+        obj.call = fn
+        var result = obj.call(...arg)
+        delete obj.call
+        return result
+    }
+
+    //3。 自定义函数实现bind方法
+    function bind(fn,obj,...arg) {
+        if(obj == undefined || obj == null){
+            obj = window
+        }
+        obj.call = fn
+        return function (...arg) {
+            return obj.call(...arg)
+        }
+    }
+</script>
+</body>
+</html>

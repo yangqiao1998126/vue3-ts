@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var t = [1, 2, 3]
+
+    //1. 数组map方法实现
+    function definemap(array, cb) {
+        var arr = []
+        for (let i = 0; i < array.length; i++) {
+            arr.push(cb(array[i], i))
+        }
+        return arr
+    }
+
+    var tmap = definemap(t, (vale, index) => {
+        return vale + index
+    })
+
+
+    //2. 数组reduce方法实现
+    function definereduce(array, cb, init = 0) {
+        var result = init
+        for (let i = 0; i < array.length; i++) {
+            result = cb(result, array[i], i)
+        }
+        return result
+    }
+
+    var treduce = definereduce(t, (pre, now) => {
+        return pre + now
+    })
+
+
+    //3. 数组filter方法实现
+    function definefilter(array, cb) {
+        var arr = []
+        for (let i = 0; i < array.length; i++) {
+            if (cb(array[i], i)) {
+                arr.push(cb(array[i], i))
+            }
+        }
+        return arr
+    }
+
+
+    //4.数组find方法的实现
+    function definefind(array, cb) {
+        for (let i = 0; i < array.length; i++) {
+            if (cb(array[i], i)) {
+                return array[i]
+                break;
+            }
+            if (i == array.length) {
+                return undefined
+            }
+        }
+
+    }
+
+    // console.log(definefind(t,(value,index) => {
+    //     return value + 1 == 5
+    // }))
+
+
+    //5. 数组 findindex 、 every() 、 some()
+
+//--------数组去重
+    function unique1(array) {
+        var arr = []
+        array.forEach(item => {
+            if (arr.indexOf(item) == -1) {
+                arr.push(item)
+            }
+        })
+        return arr
+    }
+
+    var t = [1, 2, 3, 4, 5, 3];
+    console.log(unique1(t))
+
+    function unique2(array) {
+        var obj = {}
+        var arr = []
+        array.forEach(item => {
+            if (!obj.hasOwnProperty(item)) {
+                obj[item] = true
+                arr.push(item)
+            }
+        })
+        return arr
+    }
+
+    console.log(unique2(t))
+
+    function unique3(array) {
+        return Array.from(new Set(array))  //或者 [...new Set(array)]
+    }
+
+    console.log(unique3(t))
+
+    //--------数组合并与切片
+    function defineContact(array, ...vals) {
+        var arr = [...array]
+        vals.forEach(item => {
+            if (item.constructor == Array) {
+                arr.push(...item)
+            } else {
+                arr.push(item)
+            }
+        })
+        return arr
+    }
+
+//------数组扁平化
+    //方法1 利用reduce加递归
+    function flatten1(array) {
+        return array.reduce((pre, now) => {
+            if (now instanceof Array && now.some(now => now.constructor == Array)) {
+                //需要递归
+                return pre.concat(flatten1(now))
+            } else {
+                return pre.concat(now)
+            }
+        }, [])
+    }
+
+    console.log(flatten1([1, 2, [3], [4, [5]]]))
+
+    //方法2 利用 ... + contact
+    function flatten2(array) {
+        let arr = [].concat(...array)
+        while (arr.some(val => Array.isArray(val))) {
+            // arr.concat(val)
+            arr = [].concat(...arr)
+        }
+        return arr
+    }
+
+    console.log(flatten2([1, 2, 3, [4], [6, [9999]]]), '------------')
+
+
+//数组取差异
+    //different([1,2,3],[2,5])   ====>   [1,3]
+
+   function different(arr1,arr2){
+        if(arr1.length ===0){
+            return []
+        }
+        if(arr2.length === 0 ){
+            return arr1
+        }
+        return arr1.filter(item => arr2.indexOf(item) === -1 )
+   }
+
+
+
+
+
+</script>
+</body>
+</html>

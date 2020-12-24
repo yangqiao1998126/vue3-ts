@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /*1. input中光标的燕策修改 */
+        input{
+            caret-color: pink;
+        }
+        /*2.plcaeholder 的颜色修改*/
+        input::-webkit-input-placeholder{
+            color: red;
+        }
+        /*7. 禁止长按保存图片 文字*/
+            img{
+                -webkit-touch-callout: none;
+            }
+        /*8. 禁止长安选择文字   */
+           dody{
+               user-select: none;
+           }
+        /*9. 元素被触摸是产生的半透明遮罩去掉    */
+        .aaaa{
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+    </style>
+</head>
+<body>
+        //3. 移动端输入框 键盘有搜索按钮
+        <form action="" onsubmit="return false">
+            <input type="search">
+        </form>
+
+        //4. 移动端键盘纯数字
+        <input pattern="[0-9]*" type="text" placeholder="纯数字">
+
+        //5. input框自动聚焦
+        <input type="text" autofocus="autofocus">
+
+        //6. 自动关闭ios首字母大写
+        <input type="text" autocapitalize="off">
+
+        //10. 文本域的placeholder怎么换行  &#10;
+        <textarea placeholder="方法士大夫首发式地方是&#10;的威风威风认为">
+
+        </textarea>
+
+
+</body>
+</html>

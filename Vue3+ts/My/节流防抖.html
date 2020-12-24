@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .test {
+            width: 100%;
+            height: 30vh;
+            background: red;
+            text-align: center;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+<div class="test"></div>
+<script>
+
+    //防抖
+    // function debounce(fn, delary,isimmeiate) {
+    //     let timeout;
+    //    // console.log(this)
+    //     return function () {
+    //         clearTimeout(timeout)
+    //         if(isimmeiate){
+    //             let flag = !timeout
+    //             timeout = setTimeout(() => {
+    //                 timeout = null
+    //                 fn.apply(this,arguments)
+    //             },delary)
+    //             if(flag) fn.apply(this,arguments)
+    //
+    //         }
+    //         else{
+    //             timeout = setTimeout(() => {
+    //                 // console.log(this)
+    //                 fn.apply(this,arguments)
+    //             }, delary)
+    //        }
+    //
+    //     }
+    // }
+
+
+
+    //节流
+        //时间戳方式
+     /*   function throttle (fn,delary){
+            let old = 0;
+            old = 0;
+           return function(){
+               cur = Date.now()
+               if(cur - old > delary) {
+                   fn.call(this,arguments)
+                   old = cur
+               }
+           }
+        }*/
+        //定时器方式
+            function throttle (fn,delary){
+                let timeout;
+                return () => {
+                    if(!timeout) {
+                        timeout = setTimeout(() => {
+                            fn.call(this,arguments)
+                            timeout = 0
+                        } , delary)
+                    }
+                }
+            }
+    let num = 0
+    let aaaa = 99999
+    var test = document.getElementsByClassName('test')[0]
+
+    function yidong(qqq) {
+      //  console.log(this)
+        num++
+        console.log(1111)
+        test.innerText = num
+    }
+
+    //test.onmousemove = debounce(yidong,2000,true)
+    test.onmousemove = throttle(yidong,1500)
+
+</script>
+</body>
+</html>
